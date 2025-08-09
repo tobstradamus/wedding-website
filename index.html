@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toby & Katie - September 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #f5f1eb,
+                    #f5f1eb 2px,
+                    #f3efe9 2px,
+                    #f3efe9 4px
+                ),
+                linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3d2914;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c2c2c;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #8B4513;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            padding: 4rem 0 2rem 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page Styles */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(139, 69, 19, 0.08), rgba(139, 69, 19, 0.03));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .hero-names {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .couple-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        .wedding-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .wedding-location {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        /* Section Styles */
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section h2 {
+            color: #3d2914;
+            margin-bottom: 3rem;
+            font-size: 3rem;
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .section h3 {
+            color: #3d2914;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.8rem;
+            font-family: 'Pinyon Script', cursive;
+            font-weight: 400;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #8B4513;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #8B4513;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255,255,255,1);
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #8B4513;
+            font-size: 1.1rem;
+        }
+
+        .timeline-event {
+            color: #2c2c2c;
+            margin-top: 0.5rem;
+        }
+
+        /* Photo Gallery */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Registry Styles */
+        .registry-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .registry-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .registry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .registry-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .amazon { color: #FF9900; }
+        .crate { color: #E31837; }
+        .anthropologie { color: #000; }
+
+        /* Wedding Party */
+        .party-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .party-member {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .party-photo-placeholder {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        .party-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .party-role {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .party-bio {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Location Details */
+        .location-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .accommodation-item,
+        .travel-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-names {
+                font-size: 3rem;
+            }
+
+            .couple-photo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .wedding-date, .wedding-location {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .timeline {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">T & K</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                    <li><a href="#" onclick="showPage('location')">Location Details</a></li>
+                    <li><a href="#" onclick="showPage('timeline')">Wedding Timeline</a></li>
+                    <li><a href="#" onclick="showPage('gallery')">Photo Gallery</a></li>
+                    <li><a href="#" onclick="showPage('registry')">Gift Registry</a></li>
+                    <li><a href="#" onclick="showPage('party')">Wedding Party</a></li>
+                </ul>
+                <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <h1 class="hero-names" style="color: #3d2914;">Katelyn + Tobin</h1>
+                <div class="couple-photo">Couple Photo</div>
+                <p class="wedding-date" style="color: #3d2914;">September 2026</p>
+                <p class="wedding-location" style="color: #3d2914;">Italy</p>
+            </div>
+            
+            <div class="section">
+                <h2>Join Us for Our Special Day</h2>
+                <p style="text-align: center; font-size: 1.1rem; line-height: 1.8;">
+                    We're excited to celebrate our love story with family and friends in the beautiful countryside of Italy. 
+                    This website contains all the information you'll need for our wedding celebration. 
+                    We can't wait to see you there!
+                </p>
+            </div>
+        </div>
+
+        <!-- Location Details Page -->
+        <div id="location" class="page">
+            <div class="section">
+                <h2>Location Details</h2>
+                
+                <div class="location-section">
+                    <h3>📍 Wedding Venue</h3>
+                    <p>Our ceremony and reception will be held at a beautiful villa in the Italian countryside. Detailed address and directions will be provided closer to the wedding date.</p>
+                </div>
+
+                <div class="location-section">
+                    <h3>🏨 Accommodations</h3>
+                    
+                    <div class="accommodation-item">
+                        <div class="item-title">Villa Bella Vista</div>
+                        <p>Luxury villa rentals for groups. Perfect for the wedding party and close family. Includes breakfast and stunning views of the countryside.</p>
+                    </div>
+                    
+                    <div class="accommodation-item">
+                        <div class="item-title">Hotel Romano</div>
+                        <p>Boutique hotel in the nearby town center. Walking distance to shops and restaurants. Special rates available for wedding guests.</p>
+                    </div>
+                    
+                    <div class="accommodation-item">
+                        <div class="item-title">Agriturismo Monte Verde</div>
+                        <p>Traditional farmhouse accommodation offering an authentic Italian experience. Includes farm-to-table meals and wine tastings.</p>
+                    </div>
+                </div>
+
+                <div class="location-section">
+                    <h3>✈️ Travel Information</h3>
+                    
+                    <div class="travel-item">
+                        <div class="item-title">Nearest Airport</div>
+                        <p>Rome Fiumicino Airport (FCO) - approximately 2 hours by car or train to the venue area.</p>
+                    </div>
+                    
+                    <div class="travel-item">
+                        <div class="item-title">Transportation</div>
+                        <p>We recommend renting a car for flexibility exploring the region. Shuttle service from major hotels to the venue will be provided on the wedding day.</p>
+                    </div>
+                </div>
+
+                <div class="location-section">
+                    <h3>🍝 Local Recommendations</h3>
+                    <ul style="margin-left: 1rem; margin-top: 1rem;">
+                        <li><strong>Osteria del Borgo</strong> - Authentic local cuisine and excellent wine selection</li>
+                        <li><strong>Mercato Centrale</strong> - Traditional market for local specialties and souvenirs</li>
+                        <li><strong>Castello di Montecroce</strong> - Historic castle with guided tours and tastings</li>
+                        <li><strong>Thermal Springs at Bagno Vignoni</strong> - Relaxing natural hot springs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wedding Timeline Page -->
+        <div id="timeline" class="page">
+            <div class="section">
+                <h2>Wedding Timeline</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">Friday, September 25, 2026</div>
+                        <div class="timeline-event">
+                            <strong>Guest Arrival</strong><br>
+                            Check into accommodations and settle in. Welcome packets with local information will be available at each hotel.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">Friday Evening - 7:00 PM</div>
+                        <div class="timeline-event">
+                            <strong>Welcome Party</strong><br>
+                            Casual gathering at the villa terrace with drinks, appetizers, and live acoustic music. Come as you are and mingle with other guests!
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">Saturday, September 26 - 4:00 PM</div>
+                        <div class="timeline-event">
+                            <strong>Rehearsal Dinner</strong><br>
+                            For wedding party and immediate family. Traditional Italian feast in the villa's private dining room.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">Sunday, September 27 - 4:00 PM</div>
+                        <div class="timeline-event">
+                            <strong>Wedding Ceremony</strong><br>
+                            The main event! Outdoor ceremony in the villa's garden overlooking the valley. Please arrive by 3:45 PM.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">Sunday - 5:30 PM</div>
+                        <div class="timeline-event">
+                            <strong>Cocktail Hour</strong><br>
+                            Drinks and hors d'oeuvres on the terrace while the couple takes photos.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">Sunday - 7:00 PM</div>
+                        <div class="timeline-event">
+                            <strong>Reception Dinner</strong><br>
+                            Multi-course Italian dinner with wine pairings, followed by dancing under the stars until late!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Gallery Page -->
+        <div id="gallery" class="page">
+            <div class="section">
+                <h2>Photo Gallery</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">A collection of memories from our journey together</p>
+                
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 1</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 2</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 3</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 4</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 5</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">Photo 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gift Registry Page -->
+        <div id="registry" class="page">
+            <div class="section">
+                <h2>Gift Registry</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Your presence is the greatest present, but if you wish to honor us with a gift, we've registered at these stores:</p>
+                
+                <div class="registry-links">
+                    <a href="#" class="registry-card">
+                        <span class="registry-icon amazon">📦</span>
+                        <h3>Amazon</h3>
+                        <p>Home essentials, kitchen items, and more for our new life together</p>
+                    </a>
+                    
+                    <a href="#" class="registry-card">
+                        <span class="registry-icon crate">🏠</span>
+                        <h3>Crate & Barrel</h3>
+                        <p>Beautiful home decor and quality kitchenware for entertaining</p>
+                    </a>
+                    
+                    <a href="#" class="registry-card">
+                        <span class="registry-icon anthropologie">✨</span>
+                        <h3>Anthropologie</h3>
+                        <p>Unique home goods and artisanal pieces that reflect our style</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wedding Party Page -->
+        <div id="party" class="page">
+            <div class="section">
+                <h2>Wedding Party</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Meet the amazing people standing by our side on our special day</p>
+                
+                <div class="party-grid">
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">Sarah Johnson</div>
+                        <div class="party-role">Maid of Honor</div>
+                        <div class="party-bio">Katie's sister and best friend since childhood. Sarah is a teacher who loves travel and adventure, just like Katie!</div>
+                    </div>
+                    
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">Mike Thompson</div>
+                        <div class="party-role">Best Man</div>
+                        <div class="party-bio">Toby's college roommate and lifelong friend. Mike introduced Toby to his love of hiking and outdoor adventures.</div>
+                    </div>
+                    
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">Emma Rodriguez</div>
+                        <div class="party-role">Bridesmaid</div>
+                        <div class="party-bio">Katie's college friend and roommate. Emma is a chef who inspired Katie's love of cooking and trying new cuisines.</div>
+                    </div>
+                    
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">David Chen</div>
+                        <div class="party-role">Groomsman</div>
+                        <div class="party-bio">Toby's colleague and workout buddy. David shares Toby's passion for fitness and outdoor sports.</div>
+                    </div>
+                    
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">Lisa Park</div>
+                        <div class="party-role">Bridesmaid</div>
+                        <div class="party-bio">Katie's work friend who became family. Lisa is always up for spontaneous adventures and girls' trips.</div>
+                    </div>
+                    
+                    <div class="party-member">
+                        <div class="party-photo-placeholder">Photo</div>
+                        <div class="party-name">Alex Wilson</div>
+                        <div class="party-role">Groomsman</div>
+                        <div class="party-bio">Toby's childhood friend and neighbor. They've been through everything together since they were kids.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (!nav.contains(event.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
